@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.controller.ServerController">
+    <children>
+        <Label layoutX="37.0" layoutY="27.0" prefHeight="33.0" prefWidth="63.0" text="Start server:" />
+        <Button fx:id="startServ" layoutX="110.0" layoutY="30.0" mnemonicParsing="false" onAction="#startServer" prefHeight="26.0" prefWidth="78.0" text="Start Server" />
+        <Label layoutX="37.0" layoutY="130.0" prefHeight="26.0" prefWidth="62.0" text="Stop server:" />
+        <Button fx:id="stopServ" layoutX="110.0" layoutY="128.0" mnemonicParsing="false" onAction="#stopServer" text="Stop Server" />
+    </children>
+</AnchorPane>

@@ -1,0 +1,14 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+
+<!--<?import javafx.scene.control.*?>-->
+<!--<?import javafx.scene.layout.*?>-->
+
+<!--<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.controller.ClientController">-->
+<!--    <children>-->
+<!--        <Label fx:id="loggedIn" layoutX="10.0" layoutY="30.0" text="Logged in:"/>-->
+<!--        <Label fx:id="loggedInTxt" layoutX="70.0" layoutY="30.0" />-->
+<!--        <Label fx:id="attend" layoutX="10.0" layoutY="60.0" text="Attendances:"/>-->
+<!--        <Label fx:id="attendances" layoutX="80.0" layoutY="60.0" />-->
+<!--        <Button fx:id="showAtt" layoutX="40.0" layoutY="100.0" mnemonicParsing="false" onAction="#showAttendance" text="Show Attendance" />-->
+<!--    </children>-->
+<!--</AnchorPane>-->

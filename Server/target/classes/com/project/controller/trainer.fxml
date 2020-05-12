@@ -1,0 +1,68 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+
+<!--<?import javafx.scene.control.*?>-->
+<!--<?import javafx.scene.layout.*?>-->
+
+<!--<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="572.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.controller.TrainerController">-->
+<!--    <children>-->
+<!--        <Label layoutX="51.0" layoutY="40.0" text="Program name:" />-->
+<!--        <Label layoutX="82.0" layoutY="82.0" text="Activities:" />-->
+<!--        <TextField fx:id="programName" layoutX="143.0" layoutY="36.0" promptText="Enter program name" />-->
+<!--        <TextField fx:id="programActivities" layoutX="143.0" layoutY="78.0" promptText="Enter activity id's" />-->
+<!--        <Button fx:id="createProgram" layoutX="167.0" layoutY="125.0" mnemonicParsing="false" onAction="#createProgram" text="Create Program" />-->
+
+<!--        <Label layoutX="399.0" layoutY="40.0" text="Diet name:" />-->
+<!--        <Label layoutX="428.0" layoutY="82.0" text="Food:" />-->
+<!--        <TextField fx:id="dietName" layoutX="476.0" layoutY="36.0" promptText="Enter diet name" />-->
+<!--        <TextField fx:id="dietFoods" layoutX="476.0" layoutY="78.0" promptText="Enter food id's" />-->
+<!--        <Button fx:id="createDiet" layoutX="500.0" layoutY="125.0" mnemonicParsing="false" onAction="#createDiet" text="Create Diet" />-->
+
+<!--        <Label layoutX="777.0" layoutY="40.0" text="Client name:" />-->
+<!--        <Label layoutX="755.0" layoutY="79.0" text="Client password:" />-->
+<!--        <TextField fx:id="clientName" layoutX="867.0" layoutY="36.0" promptText="Enter client name" />-->
+<!--        <TextField fx:id="clientPassword" layoutX="867.0" layoutY="75.0" promptText="Enter client password" />-->
+<!--        <Button fx:id="createClient" layoutX="867.0" layoutY="125.0" mnemonicParsing="false" onAction="#createClient" text="Create Client" />-->
+
+<!--        <Label layoutX="167.0" layoutY="194.0" text="Activities" />-->
+<!--        <TableView id="Activities" fx:id="Activities" layoutX="41.0" layoutY="220.0" prefHeight="281.0" prefWidth="300.0" tableMenuButtonVisible="false">-->
+<!--            <columns>-->
+<!--                <TableColumn fx:id="activityIdT" prefWidth="75.0" text="Id" />-->
+<!--                <TableColumn fx:id="activityDurationT" prefWidth="74.19999694824219" text="duration" />-->
+<!--                <TableColumn fx:id="activityIntensityT" prefWidth="76.20001220703125" text="intensity" />-->
+<!--                <TableColumn fx:id="activityNameT" prefWidth="75.0" text="name" />-->
+<!--            </columns>-->
+<!--        </TableView>-->
+
+<!--        <Label layoutX="510.0" layoutY="194.0" text="Food" />-->
+<!--        <TableView id="Foods" fx:id="Foods" layoutX="374.0" layoutY="220.0" prefHeight="282.0" prefWidth="300.0" tableMenuButtonVisible="false">-->
+<!--            <columns>-->
+<!--                <TableColumn fx:id="foodIdT" prefWidth="75.0" text="Id" />-->
+<!--                <TableColumn fx:id="foodDurationT" prefWidth="74.19999694824219" text="duration" />-->
+<!--                <TableColumn fx:id="foodCaloriesT" prefWidth="76.20001220703125" text="calories" />-->
+<!--                <TableColumn fx:id="foodNameT" prefWidth="75.0" text="name" />-->
+<!--            </columns>-->
+<!--        </TableView>-->
+
+<!--        <Label layoutX="880.0" layoutY="194.0" text="Clients" />-->
+<!--        <TableView id="Clients" fx:id="Clients" layoutX="735.0" layoutY="220.0" prefHeight="282.0" prefWidth="325.0" tableMenuButtonVisible="false">-->
+<!--            <columns>-->
+<!--                <TableColumn fx:id="clientIdT" prefWidth="75.0" text="Id" />-->
+<!--                <TableColumn fx:id="clientNameT" prefWidth="74.19999694824219" text="name" />-->
+<!--                <TableColumn fx:id="clientPasswordT" prefWidth="76.20001220703125" text="password" />-->
+<!--                <TableColumn fx:id="clientAttendanceT" minWidth="100.0" prefWidth="75.0" text="attendances" />-->
+<!--            </columns>-->
+<!--        </TableView>-->
+<!--        <Button fx:id="updateClient" layoutX="854.0" layoutY="502.0" mnemonicParsing="false" onAction="#updateClient" text="Update Client" />-->
+
+<!--        <ScrollPane fx:id="notifications" layoutX="1077.0" layoutY="225.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.leftAnchor="1077.0" AnchorPane.topAnchor="325.0">-->
+<!--         <content>-->
+<!--                <VBox fx:id="vbox" prefHeight="100.0" prefWidth="200">-->
+<!--                    <children>-->
+<!--                        <TextArea fx:id="notifyTextT" prefHeight="100.0" prefWidth="200.0" />-->
+<!--                    </children>-->
+<!--                </VBox>-->
+<!--         </content>-->
+<!--        </ScrollPane>-->
+
+<!--    </children>-->
+<!--</AnchorPane>-->

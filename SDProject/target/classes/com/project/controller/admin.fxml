@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="786.0" prefWidth="701.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.controller.AdminController">
+    <children>
+        <Label layoutX="61.0" layoutY="40.0" text="Mail:" />
+        <Label layoutX="61.0" layoutY="75.0" text="Name:" />
+        <Label layoutX="61.0" layoutY="110.0" text="Password:" />
+        <Label layoutX="61.0" layoutY="140.0" text="Id:" />
+        <TextField fx:id="mail" layoutX="120.0" layoutY="35.0" promptText="Enter mail" />
+        <TextField fx:id="name" layoutX="120.0" layoutY="70.0" promptText="Enter name" />
+        <TextField fx:id="password" layoutX="120.0" layoutY="105.0" promptText="Enter password" />
+        <TextField fx:id="id" layoutX="120.0" layoutY="135.0" promptText="Enter id" />
+        <Button fx:id="createTrainer" layoutX="269.0" layoutY="35.0" mnemonicParsing="false" onAction="#createTrainer" text="Create Trainer" />
+        <Button fx:id="updateTrainer" layoutX="266.0" layoutY="70.0" mnemonicParsing="false" onAction="#updateTrainer" text="Update Trainer" />
+        <Button fx:id="deleteTrainer" layoutX="269.0" layoutY="106.0" mnemonicParsing="false" onAction="#deleteTrainer" text="Delete Trainer" />
+        <Button fx:id="findTrainer" layoutX="266.0" layoutY="135.0" mnemonicParsing="false" onAction="#findTrainer" text="Find Trainer" />
+
+        <Label layoutX="61.0" layoutY="180.0" text="Name:" />
+        <Label layoutX="35.0" layoutY="209.0" text="Duration(min):" />
+        <Label layoutX="2.0" layoutY="240.0" text="Calories Count(/100g):" />
+        <Label layoutX="67.0" layoutY="272.0" text="Id:" />
+        <TextField fx:id="foodName" layoutX="120.0" layoutY="175.0" promptText="Enter food name" />
+        <TextField fx:id="foodDuration" layoutX="120.0" layoutY="205.0" promptText="Enter preparing duration" />
+        <TextField fx:id="foodCalories" layoutX="120.0" layoutY="235.0" promptText="Enter calorie count" />
+        <TextField fx:id="foodId" layoutX="120.0" layoutY="268.0" promptText="Enter food id" />
+        <Button fx:id="createFood" layoutX="269.0" layoutY="176.0" mnemonicParsing="false" onAction="#createFood" text="Create Food" />
+        <Button fx:id="updateFood" layoutX="267.0" layoutY="206.0" mnemonicParsing="false" onAction="#updateFood" text="Update Food" />
+        <Button fx:id="deleteFood" layoutX="269.0" layoutY="236.0" mnemonicParsing="false" onAction="#deleteFood" text="Delete Food" />
+
+        <Label layoutX="383.0" layoutY="180.0" text="Name:" />
+        <Label layoutX="367.0" layoutY="209.0" text="Duration(min):" />
+        <Label layoutX="366.0" layoutY="240.0" text="Intensity(1-10):" />
+        <Label layoutX="393.0" layoutY="272.0" text="Id:" />
+        <TextField fx:id="activityName" layoutX="446.0" layoutY="176.0" promptText="Enter activity name" />
+        <TextField fx:id="activityDuration" layoutX="446.0" layoutY="205.0" promptText="Enter activity duration" />
+        <TextField fx:id="activityIntensity" layoutX="446.0" layoutY="236.0" promptText="Enter activity intensity" />
+        <TextField fx:id="activityId" layoutX="446.0" layoutY="268.0" promptText="Enter activity id" />
+        <Button fx:id="createActivity" layoutX="594.0" layoutY="175.0" mnemonicParsing="false" onAction="#createActivity" text="Create Activity" />
+        <Button fx:id="deleteActivity" layoutX="594.0" layoutY="235.0" mnemonicParsing="false" onAction="#deleteActivity" text="Delete Activity" />
+        <Button fx:id="updateActivity" layoutX="595.0" layoutY="206.0" mnemonicParsing="false" onAction="#updateActivity" text="Update Activity" />
+
+        <Label layoutX="170.0" layoutY="321.0" text="Trainers" />
+        <TableView id="Trainers" fx:id="Trainers" layoutX="7.0" layoutY="339.0" prefHeight="224.0" prefWidth="368.0" tableMenuButtonVisible="false">
+            <columns>
+                <TableColumn fx:id="trainerId" prefWidth="75.0" text="Id" />
+                <TableColumn fx:id="trainerPassword" prefWidth="74.19999694824219" text="password" />
+                <TableColumn fx:id="trainerMail" minWidth="150.0" prefWidth="76.20001220703125" text="mail" />
+                <TableColumn fx:id="trainerName" prefWidth="75.0" text="name" />
+            </columns>
+        </TableView>
+        <Button fx:id="updateTrainerT" layoutX="120.0" layoutY="563.0" mnemonicParsing="false" onAction="#updateTrainerT" text="Update Trainer Table" />
+
+        <Label layoutX="520.0" layoutY="321.0" text="Food" />
+        <TableView id="Foods" fx:id="Foods" layoutX="379.0" layoutY="339.0" prefHeight="224.0" prefWidth="321.0" tableMenuButtonVisible="false">
+            <columns>
+                <TableColumn fx:id="foodIdT" prefWidth="75.0" text="Id" />
+                <TableColumn fx:id="foodDurationT" prefWidth="74.19999694824219" text="duration" />
+                <TableColumn fx:id="foodCaloriesT" minWidth="100.0" prefWidth="76.20001220703125" text="calories/100g" />
+                <TableColumn fx:id="foodNameT" prefWidth="75.0" text="name" />
+            </columns>
+        </TableView>
+        <Button fx:id="updateFoodT" layoutX="470.0" layoutY="563.0" mnemonicParsing="false" onAction="#updateFoodT" text="Update Food Table" />
+
+        <Label layoutX="300.0" layoutY="589.0" text="Activities" />
+        <TableView id="Activities" fx:id="Activities" layoutX="174.0" layoutY="607.0" prefHeight="175.0" prefWidth="350.0" tableMenuButtonVisible="false">
+            <columns>
+                <TableColumn fx:id="activityIdT" prefWidth="75.0" text="Id" />
+                <TableColumn fx:id="activityDurationT" minWidth="100.0" prefWidth="74.19999694824219" text="duration(min)" />
+                <TableColumn fx:id="activityIntensityT" minWidth="100.0" prefWidth="76.20001220703125" text="intensity(1-10)" />
+                <TableColumn fx:id="activityNameT" prefWidth="75.0" text="name" />
+            </columns>
+        </TableView>
+        <Button fx:id="updateActivityT" layoutX="540.0" layoutY="746.0" mnemonicParsing="false" onAction="#updateActivityT" text="Update Activity Table" />
+
+        <Label layoutX="419.0" layoutY="52.0" text="Trainer ID:" />
+        <Label layoutX="479.0" layoutY="84.0" text="Program and diet reports:" />
+        <TextField fx:id="trainerIdR" layoutX="483.0" layoutY="48.0" promptText="Enter trainer id" />
+        <Button fx:id="createTxtReport" layoutX="429.0" layoutY="115.0" mnemonicParsing="false" onAction="#createTxtReport" text="Create Txt Report" />
+        <Button fx:id="createPdfReport" layoutX="576.0" layoutY="115.0" mnemonicParsing="false" onAction="#createPdfReport" text="Create Pdf Report" />
+    </children>
+</AnchorPane>
