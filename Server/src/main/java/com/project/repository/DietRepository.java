@@ -11,4 +11,6 @@ import java.util.List;
 public interface DietRepository extends JpaRepository<Diet, Integer> {
     //Diet findByName(String name);
     List<Diet> findByTrainer(Trainer trainer);
+
+    Diet findByDietName(String name);
 }

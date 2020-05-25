@@ -15,8 +15,10 @@ public class EchoThread extends Thread {
     private ClientService clientService;
     private ProgramService programService;
     private DietService dietService;
+    private RequestService requestService;
+    private RequestDietService requestDietService;
 
-    public EchoThread(ServiceFunctions serviceFunctions, TrainerService trainerService, FoodService foodService, ActivityService activityService, ClientService clientService, ProgramService programService, DietService dietService, Socket socket){
+    public EchoThread(ServiceFunctions serviceFunctions, TrainerService trainerService, FoodService foodService, ActivityService activityService, ClientService clientService, ProgramService programService, DietService dietService, RequestService requestService, RequestDietService requestDietService, Socket socket){
         this.serviceFunctions = serviceFunctions;
         this.trainerService = trainerService;
         this.foodService = foodService;
@@ -24,6 +26,8 @@ public class EchoThread extends Thread {
         this.clientService = clientService;
         this.programService = programService;
         this.dietService = dietService;
+        this.requestService = requestService;
+        this.requestDietService = requestDietService;
         this.socket = socket;
     }
 
@@ -36,7 +40,7 @@ public class EchoThread extends Thread {
             while (true){
                 String received = Transmission.receiveFromClient(socket);
                 String[] values = received.split(",");
-                TransmissionFunc.sendBack(socket, objectOutputStream, values, serviceFunctions, trainerService, foodService, activityService, programService, dietService, clientService);
+                TransmissionFunc.sendBack(socket, objectOutputStream, values, serviceFunctions, trainerService, foodService, activityService, programService, dietService, clientService, requestService, requestDietService);
                 }
             }catch (Exception e){
             e.printStackTrace();

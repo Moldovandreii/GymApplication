@@ -1,14 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.collections.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.controller.ClientController">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="513.0" prefWidth="473.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.controller.ClientController">
     <children>
-        <Label fx:id="loggedIn" layoutX="10.0" layoutY="30.0" text="Logged in:"/>
+        <Label fx:id="loggedIn" layoutX="10.0" layoutY="30.0" text="Logged in:" />
         <Label fx:id="loggedInTxt" layoutX="70.0" layoutY="30.0" />
-        <Label fx:id="attend" layoutX="10.0" layoutY="60.0" text="Attendances:"/>
+        <Label fx:id="attend" layoutX="10.0" layoutY="60.0" text="Attendances:" />
         <Label fx:id="attendances" layoutX="80.0" layoutY="60.0" />
         <Button fx:id="showAtt" layoutX="40.0" layoutY="100.0" mnemonicParsing="false" onAction="#showAttendance" text="Show Attendance" />
+        <Label fx:id="myTrainer" layoutX="184.0" layoutY="30.0" text="My Trainer:" />
+        <Label fx:id="myTrainerTxt" layoutX="253.0" layoutY="30.0" />
+        <Label fx:id="setRatings" layoutX="184.0" layoutY="60.0" text="Review trainer:" />
+        <ComboBox fx:id="rating" layoutX="269.0" layoutY="56.0" value="Rating">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="1" />
+                    <String fx:value="2" />
+                    <String fx:value="3" />
+                    <String fx:value="4" />
+                    <String fx:value="5" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+        <Button fx:id="setRating" layoutX="358.0" layoutY="56.0" mnemonicParsing="false" onAction="#setRating" text="Set Rating" />
+        <Label layoutX="170.0" layoutY="321.0" text="Trainers" />
+        <TableView id="Trainers" fx:id="Trainers" layoutX="6.0" layoutY="144.0" prefHeight="224.0" prefWidth="448.0" tableMenuButtonVisible="false">
+            <columns>
+                <TableColumn fx:id="trainerId" prefWidth="75.0" text="Id" />
+                <TableColumn fx:id="trainerMail" minWidth="150.0" prefWidth="76.20001220703125" text="mail" />
+                <TableColumn fx:id="trainerName" prefWidth="75.0" text="name" />
+                <TableColumn fx:id="trainerReview" prefWidth="75.0" text="review" />
+                <TableColumn fx:id="trainerReviews" prefWidth="75.0" text="reviews" />
+            </columns>
+        </TableView>
+        <Button fx:id="updateTrainerT" layoutX="159.0" layoutY="368.0" mnemonicParsing="false" onAction="#updateTrainerT" prefHeight="26.0" prefWidth="186.0" text="Update Trainer Table" />
+        <Label layoutX="10.0" layoutY="417.0" prefHeight="26.0" prefWidth="92.0" text="Change Trainer:" />
+        <TextField fx:id="changeId" layoutX="104.0" layoutY="417.0" prefHeight="26.0" prefWidth="135.0" promptText="Enter desired trainer id" />
+        <Button fx:id="requestChange" layoutX="252.0" layoutY="417.0" mnemonicParsing="false" onAction="#requestChange" prefHeight="26.0" prefWidth="110.0" text="Request change" />
+        <Label layoutX="10.0" layoutY="453.0" prefHeight="26.0" prefWidth="92.0" text="Change Diet:" />
+        <TextField fx:id="changeDiet" layoutX="102.0" layoutY="453.0" prefHeight="26.0" prefWidth="135.0" promptText="Enter diet specification" />
+        <Button fx:id="requestDiet" layoutX="252.0" layoutY="453.0" mnemonicParsing="false" onAction="#requestNewDiet" prefHeight="26.0" prefWidth="110.0" text="Request new diet" />
+        <Button fx:id="showDiet" layoutX="375.0" layoutY="454.0" mnemonicParsing="false" onAction="#showDiet" prefHeight="26.0" prefWidth="92.0" text="Show my diet" />
     </children>
 </AnchorPane>

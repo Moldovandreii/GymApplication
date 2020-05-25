@@ -21,10 +21,12 @@ public class ServerController {
     private ClientService clientService;
     private ProgramService programService;
     private DietService dietService;
+    private RequestService requestService;
+    private RequestDietService requestDietService;
     private int running = 0;
 
     @Autowired
-    public ServerController(ServiceFunctions serviceFunctions, TrainerService trainerService, FoodService foodService, ActivityService activityService, ClientService clientService, ProgramService programService, DietService dietService){
+    public ServerController(ServiceFunctions serviceFunctions, TrainerService trainerService, FoodService foodService, ActivityService activityService, ClientService clientService, ProgramService programService, DietService dietService, RequestService requestService, RequestDietService requestDietService){
         this.serviceFunctions = serviceFunctions;
         this.trainerService = trainerService;
         this.foodService = foodService;
@@ -32,6 +34,8 @@ public class ServerController {
         this.clientService = clientService;
         this.programService = programService;
         this.dietService = dietService;
+        this.requestService = requestService;
+        this.requestDietService = requestDietService;
     }
 
 //    public void startServer() throws IOException {
@@ -54,7 +58,7 @@ public class ServerController {
             ServerSocket ss = new ServerSocket(6666);
             while (running == 1) {
                 socket = ss.accept();
-                new EchoThread(serviceFunctions, trainerService, foodService, activityService, clientService, programService, dietService, socket).start();
+                new EchoThread(serviceFunctions, trainerService, foodService, activityService, clientService, programService, dietService, requestService, requestDietService, socket).start();
             }
         }
 

@@ -25,6 +25,12 @@ public class Client {
     @JoinColumn(name = "trainerId", nullable = false)
     private Trainer trainer;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "client")
+    @OneToOne(mappedBy = "client", cascade = CascadeType.ALL)
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "attendanceId", referencedColumnName = "attendanceId")
     private Attendance attendanceDate;
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "dietId", nullable = false)
+    private Diet diet;
 }

@@ -3,10 +3,12 @@ package com.project.services;
 import com.project.dao.ClientDAO;
 import com.project.entities.Attendance;
 import com.project.entities.Client;
+import com.project.entities.Diet;
 import com.project.entities.Trainer;
 import com.project.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -14,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
+@Transactional
 public class ClientServiceImpl implements ClientService{
     private ClientRepository clientRepository;
 
@@ -28,8 +31,8 @@ public class ClientServiceImpl implements ClientService{
     }
 
     @Override
-    public void createClient(String name, String password, Trainer trainer) {
-        clientRepository.save(Client.builder().name(name).password(password).trainer(trainer).build());
+    public void createClient(String name, String password, Trainer trainer, Diet diet) {
+        clientRepository.save(Client.builder().name(name).password(password).trainer(trainer).diet(diet).build());
     }
 
     @Override
@@ -85,5 +88,17 @@ public class ClientServiceImpl implements ClientService{
             clientDAOS.add(client);
         }
         return clientDAOS;
+    }
+
+    public void changeTrainer(int id, Trainer trainer){
+        Client client = clientRepository.findByClientId(id);
+        //attendanceRepository.deleteByClient(client);
+        //clientRepository.deleteByClientId(id);
+        clientRepository.save(Client.builder().clientId(id).name(client.getName()).password(client.getPassword()).trainer(trainer).diet(client.getDiet()).build());
+    }
+
+    public void changeDiet(int id, Diet diet){
+        Client client = clientRepository.findByClientId(id);
+        clientRepository.save(Client.builder().clientId(id).name(client.getName()).password(client.getPassword()).trainer(client.getTrainer()).diet(diet).build());
     }
 }

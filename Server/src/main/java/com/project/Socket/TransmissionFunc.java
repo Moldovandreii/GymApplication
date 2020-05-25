@@ -12,7 +12,7 @@ import java.util.List;
 
 public class TransmissionFunc {
 
-    public static void sendBack(Socket socket, ObjectOutputStream objectOutputStream, String[] values, ServiceFunctions serviceFunctions, TrainerService trainerService, FoodService foodService, ActivityService activityService, ProgramService programService, DietService dietService, ClientService clientService){
+    public static void sendBack(Socket socket, ObjectOutputStream objectOutputStream, String[] values, ServiceFunctions serviceFunctions, TrainerService trainerService, FoodService foodService, ActivityService activityService, ProgramService programService, DietService dietService, ClientService clientService, RequestService requestService, RequestDietService requestDietService){
         if(values[0].equals("loginFunc")){
             String username = values[1];
             String password = values[2];
@@ -168,7 +168,8 @@ public class TransmissionFunc {
             String trainerName = values[3];
             String trainerPassword = values[4];
             Trainer trainer = trainerService.findByUsernameAndPassword(trainerName, trainerPassword);
-            clientService.createClient(name, password, trainer);
+            Diet diet = dietService.findById(1);
+            clientService.createClient(name, password, trainer, diet);
         }
         else if(values[0].equals("getAllClients")){
             String name = values[1];
@@ -280,6 +281,153 @@ public class TransmissionFunc {
             int attendance = client.getAttendanceDate().getAttendance();
             String ret = Integer.toString(attendance);
             Transmission.sendToClient(socket, ret);
+        }
+        else if(values[0].equals("findTrainerByClient")){
+            String name = values[1];
+            String password = values[2];
+            Client client = clientService.findByUsernameAndPassword(name, password);
+            Trainer trainer = client.getTrainer();
+            TrainerDAO trainerDAO = trainerService.getTrainerDAO(trainer.getTrainerId());
+            try{
+                objectOutputStream.writeObject(trainerDAO);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        else if(values[0].equals("rateTrainer")){
+            float rate = Integer.parseInt(values[1]);
+            int trainerId = Integer.parseInt(values[2]);
+            Trainer trainer = trainerService.findById(trainerId);
+
+            if(trainer.getReviews() == 0){
+                trainerService.updateReview(trainerId, rate);
+                trainerService.updateReviews(trainerId, 1);
+            }else{
+                float newReview = (trainer.getReview() * trainer.getReviews() + rate) / (trainer.getReviews() + 1);
+                trainerService.updateReview(trainerId, newReview);
+                trainerService.updateReviews(trainerId, trainer.getReviews() + 1);
+            }
+        }
+        else if(values[0].equals("requestChange")){
+            int currentTrainer = Integer.parseInt(values[1]);
+            int changeTrainer = Integer.parseInt(values[2]);
+            String clientName = values[3];
+            String clientPass = values[4];
+            Client client = clientService.findByUsernameAndPassword(clientName, clientPass);
+            int clientId = client.getClientId();
+            requestService.createRequest(clientId, currentTrainer, changeTrainer);
+        }
+        else if(values[0].equals("findTrainerByNameAndPass")){
+            String name = values[1];
+            String pass = values[2];
+            Trainer trainer = trainerService.findByUsernameAndPassword(name, pass);
+            Transmission.sendToClient(socket, Integer.toString(trainer.getTrainerId()));
+        }
+        else if(values[0].equals("findClientByNameAndPass")){
+            String name = values[1];
+            String pass = values[2];
+            Client client = clientService.findByUsernameAndPassword(name, pass);
+            Transmission.sendToClient(socket, Integer.toString(client.getClientId()));
+        }
+        else if(values[0].equals("findRequestToChange")){
+            int trainerId = Integer.parseInt(values[1]);
+            List<Request> requests = requestService.getRequestsToChangeFrom(trainerId);
+            RequestDAO request;
+            if(requests.size() != 0){
+               request = requestService.getRequestDAO(requests.get(0));
+            }
+            else{
+                request = null;
+            }
+            try{
+                objectOutputStream.writeObject(request);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        else if(values[0].equals("findRequestToAccept")){
+            int trainerId = Integer.parseInt(values[1]);
+            List<Request> requests = requestService.getRequestsToChangeTo(trainerId);
+            RequestDAO request;
+            if(requests.size() != 0){
+                request = requestService.getRequestDAO(requests.get(0));
+            }
+            else{
+                request = null;
+            }
+            try{
+                objectOutputStream.writeObject(request);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        else if(values[0].equals("findDietRequest")){
+            int trainerId = Integer.parseInt(values[1]);
+            List<RequestDiet> requests = requestDietService.getRequestsFromTrainer(trainerId);
+            RequestDietDAO request;
+            if(requests.size() != 0){
+                request = requestDietService.getRequestDietDAO(requests.get(0));
+            }
+            else{
+                request = null;
+            }
+            try{
+                objectOutputStream.writeObject(request);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        else if(values[0].equals("setFromTrainerStat")){
+            int requestId = Integer.parseInt(values[1]);
+            String status = values[2];
+            Request request = requestService.findById(requestId);
+            requestService.updateFromTrainerStatus(request, status);
+        }
+        else if(values[0].equals("setToTrainerStat")){
+            int requestId = Integer.parseInt(values[1]);
+            String status = values[2];
+            Request request = requestService.findById(requestId);
+            Client client = clientService.findById(request.getClientId());
+            requestService.updateToTrainerStatus(request, status);
+            Request newRequest = requestService.findById(requestId);
+            String statusFrom = newRequest.getFromTrainerResponse();
+            String statusTo = newRequest.getToTrainerResponse();
+            Trainer trainer = trainerService.findById(newRequest.getToTrainer());
+            if(statusFrom.equals("deny") || statusTo.equals("deny")){
+                requestService.updateResultStatus(newRequest, "denied");
+            }else if(statusFrom.equals("accept") && statusTo.equals("accept")){
+                requestService.updateResultStatus(newRequest, "accepted");
+//                trainerService.deleteClient(newRequest.getFromTrainer(), client);
+//                trainerService.addClient(newRequest.getToTrainer(), client);
+                clientService.changeTrainer(client.getClientId(), trainer);
+            }
+        }
+        else if(values[0].equals("sendDietRequest")){
+            int clientId = Integer.parseInt(values[1]);
+            String request = values[2];
+            Client client = clientService.findById(clientId);
+            Trainer trainer = client.getTrainer();
+            int trainerId = trainer.getTrainerId();
+            requestDietService.createRequest(clientId, trainerId, request);
+        }
+        else if(values[0].equals("changeDiet")){
+            int clientId = Integer.parseInt(values[1]);
+            String dietName = values[2];
+            Diet diet = dietService.findByDietName(dietName);
+            clientService.changeDiet(clientId, diet);
+            RequestDiet request = requestDietService.getRequestByClient(clientId);
+            requestDietService.changeStatus(request, "done");
+        }
+        else if(values[0].equals("getClientsDiet")){
+            int clientId = Integer.parseInt(values[1]);
+            Client client = clientService.findById(clientId);
+            Diet diet = client.getDiet();
+            DietDAO dietDAO = dietService.getDietDAO(diet);
+            try{
+                objectOutputStream.writeObject(dietDAO);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
 }

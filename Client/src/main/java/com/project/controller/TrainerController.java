@@ -2,9 +2,7 @@ package com.project.controller;
 
 import com.project.ObserverDP.Observer;
 import com.project.Socket.TransmissionFunc;
-import com.project.dao.ActivityDAO;
-import com.project.dao.ClientDAO;
-import com.project.dao.FoodDAO;
+import com.project.dao.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -73,6 +71,10 @@ public class TrainerController extends Observer implements Initializable{
 
     @FXML
     public TextArea notifyTextT;
+    @FXML
+    public Label requestText;
+    @FXML
+    public TextField dietTxt;
 
 
 //    private ProgramService programService;
@@ -135,6 +137,73 @@ public class TrainerController extends Observer implements Initializable{
         clientAttendanceT.setCellValueFactory(new PropertyValueFactory<ClientDAO, Integer>("attendance"));
         //Clients.getItems().setAll(clientService.findByTrainer(LoginController.trainerLogin));
         Clients.getItems().setAll(TransmissionFunc.getAllClients(LoginController.usernameLoging, LoginController.passwordLogin));
+    }
+
+
+    public void readRequest(){
+        String trainerId = TransmissionFunc.findTrainerByNameAndPass(LoginController.usernameLoging, LoginController.passwordLogin);
+        RequestDAO changeRequest = TransmissionFunc.findRequestToChange(trainerId);
+        RequestDAO acceptRequest = TransmissionFunc.findRequestToAccept(trainerId);
+        RequestDietDAO requestDiet = TransmissionFunc.findDietRequest(trainerId);
+        if(changeRequest != null){
+            requestText.setText("Change client " + changeRequest.getClientId() + " to trainer " + changeRequest.getToTrainer() + ", req id =" + changeRequest.getRequestId());
+            notifyTextT.appendText("Change client " + changeRequest.getClientId() + " to trainer " + changeRequest.getToTrainer() + ", req id =" + changeRequest.getRequestId() + "\n");
+        }else if(acceptRequest != null){
+            requestText.setText("Accept client " + acceptRequest.getClientId() + " from Trainer " + acceptRequest.getFromTrainer() + ", req id =" + acceptRequest.getRequestId());
+            notifyTextT.appendText("Accept client " + acceptRequest.getClientId() + " from Trainer " + acceptRequest.getFromTrainer() + ", req id =" + acceptRequest.getRequestId() + "\n");
+        }
+        else if(requestDiet != null){
+            requestText.setText("Diet req from client " + requestDiet.getClientId() + ": " + requestDiet.getRequest());
+            notifyTextT.appendText("Diet req from client " + requestDiet.getClientId() + ": " + requestDiet.getRequest() + "\n");
+        }
+        else{
+            requestText.setText("No requests");
+        }
+    }
+
+    public void acceptRequest(){
+        String text = requestText.getText();
+        String requestId = new String("");
+        if(text.charAt(text.length()-2) == '='){
+            requestId = requestId.concat(String.valueOf(text.charAt(text.length() - 1)));
+        }else{
+            String aux1 = String.valueOf(text.charAt(text.length() - 2));
+            String aux2 = String.valueOf(text.charAt(text.length() - 1));
+            requestId = requestId.concat(aux1);
+            requestId = requestId.concat(aux2);
+        }
+        String status = "accept";
+        if(text.charAt(0) == 'C'){
+            TransmissionFunc.setFromTrainerStat(requestId, status);
+        }else if(text.charAt(0) == 'A'){
+            TransmissionFunc.setToTrainerStat(requestId, status);
+        }
+    }
+
+    public void denyRequest(){
+        String text = requestText.getText();
+        String requestId = new String("");
+        if(text.charAt(text.length()-2) == '='){
+            requestId = requestId.concat(String.valueOf(text.charAt(text.length() - 1)));
+        }else{
+            String aux1 = String.valueOf(text.charAt(text.length() - 2));
+            String aux2 = String.valueOf(text.charAt(text.length() - 1));
+            requestId = requestId.concat(aux1);
+            requestId = requestId.concat(aux2);
+        }
+        String status = "deny";
+        if(text.charAt(0) == 'C'){
+            TransmissionFunc.setFromTrainerStat(requestId, status);
+        }else if(text.charAt(0) == 'A'){
+            TransmissionFunc.setToTrainerStat(requestId, status);
+        }
+    }
+
+    public void sendDiet(){
+        String[] values = dietTxt.getText().split(",");
+        String dietName = values[0];
+        String clientId = values[1];
+        TransmissionFunc.changeDiet(clientId, dietName);
     }
 
     @Override

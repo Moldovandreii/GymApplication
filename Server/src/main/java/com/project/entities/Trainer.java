@@ -36,8 +36,13 @@ public class Trainer {
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Client> clients;
 
+    public float review;
+
+    public int reviews;
+
     @Override
     public String toString(){
         return this.username;
     }
+
 }

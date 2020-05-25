@@ -63,8 +63,50 @@ public class TrainerServiceImpl implements TrainerService{
             trainer.setUsername(trainers.get(i).getUsername());
             trainer.setPassword(trainers.get(i).getPassword());
             trainer.setMail(trainers.get(i).getMail());
+            trainer.setReview(trainers.get(i).getReview());
+            trainer.setReviews(trainers.get(i).getReviews());
             trainerDAOS.add(trainer);
         }
         return trainerDAOS;
     }
+
+    public TrainerDAO getTrainerDAO(int id){
+        Trainer trainer = trainerRepository.findByTrainerId(id);
+        TrainerDAO trainerDAO = new TrainerDAO();
+        trainerDAO.setTrainerId(trainer.getTrainerId());
+        trainerDAO.setUsername(trainer.getUsername());
+        trainerDAO.setPassword(trainer.getPassword());
+        trainerDAO.setMail(trainer.getMail());
+        return trainerDAO;
+    }
+
+    public void updateReview(int id, float review){
+        Trainer trainer = trainerRepository.findByTrainerId(id);
+        trainerRepository.save(Trainer.builder().trainerId(id).username(trainer.getUsername()).password(trainer.getPassword()).mail(trainer.getMail()).reviews(trainer.getReviews()).review(review).build());
+    }
+
+    public void updateReviews(int id, int reviews){
+        Trainer trainer = trainerRepository.findByTrainerId(id);
+        trainerRepository.save(Trainer.builder().trainerId(id).username(trainer.getUsername()).password(trainer.getPassword()).mail(trainer.getMail()).review(trainer.getReview()).reviews(reviews).build());
+    }
+
+//    public void deleteClient(int trainerId, Client client){
+//        Trainer trainer = trainerRepository.findByTrainerId(trainerId);
+//        List<Client> clients = trainer.getClients();
+//        List<Client> updateList = new ArrayList<Client>();
+//        for(int i=0; i<clients.size(); i++){
+//            if(clients.get(i).getClientId() != client.getClientId()){
+//                updateList.add(clients.get(i));
+//            }
+//        }
+//        trainerRepository.save(Trainer.builder().trainerId(trainerId).username(trainer.getUsername()).password(trainer.getPassword()).mail(trainer.getMail()).review(trainer.getReview()).reviews(trainer.getReviews()).clients(updateList).build());
+//        Trainer tr = trainerRepository.findByTrainerId(trainerId);
+//    }
+//
+//    public void addClient(int trainerId, Client client){
+//        Trainer trainer = trainerRepository.findByTrainerId(trainerId);
+//        List<Client> clients = trainer.getClients();
+//        clients.add(client);
+//        trainerRepository.save(Trainer.builder().trainerId(trainerId).username(trainer.getUsername()).password(trainer.getPassword()).mail(trainer.getMail()).review(trainer.getReview()).reviews(trainer.getReviews()).clients(clients).build());
+//    }
 }

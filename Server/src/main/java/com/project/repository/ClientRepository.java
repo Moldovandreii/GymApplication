@@ -14,4 +14,10 @@ public interface ClientRepository extends JpaRepository<Client, Integer> {
     Client findByNameAndPassword(String name, String password);
 
     Client findByTrainerAndName(Trainer trainer, String name);
+
+    Client findByClientId(int id);
+
+    //@Transactional
+    void deleteByClientId(int id);
+
 }

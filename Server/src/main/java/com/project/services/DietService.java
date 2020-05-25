@@ -17,4 +17,8 @@ public interface DietService {
     List<Diet> findByTrainer(Trainer trainer);
 
     List<DietDAO> findByTrainerDAO(Trainer trainer);
+
+    Diet findByDietName(String name);
+
+    DietDAO getDietDAO(Diet diet);
 }

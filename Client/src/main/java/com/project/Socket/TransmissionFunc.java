@@ -196,4 +196,89 @@ public class TransmissionFunc {
         return Transmission.receiveFromServer(ClientProjectApplication.socket);
     }
 
+    public static TrainerDAO findTrainerByClient(String name, String password){
+        Transmission.sendToServer(ClientProjectApplication.socket, "findTrainerByClient," + name + "," + password);
+        try{
+            return (TrainerDAO) ClientProjectApplication.objectInputStream.readObject();
+        }catch (Exception e){
+            e.printStackTrace();
+            return  null;
+        }
+    }
+
+    public static void rateTrainer(String rate, String trainerId){
+        Transmission.sendToServer(ClientProjectApplication.socket, "rateTrainer," + rate + "," + trainerId);
+    }
+
+    public static void requestChange(String currentTrainer, String changeTrainer, String clientName, String clientPass){
+        Transmission.sendToServer(ClientProjectApplication.socket, "requestChange," + currentTrainer + "," + changeTrainer + "," + clientName + "," + clientPass);
+    }
+
+    public static String findTrainerByNameAndPass(String name, String password){
+        Transmission.sendToServer(ClientProjectApplication.socket, "findTrainerByNameAndPass," + name + "," + password);
+        String returned = Transmission.receiveFromServer(ClientProjectApplication.socket);
+        return returned;
+    }
+
+    public static String findClientByNameAndPass(String name, String password){
+        Transmission.sendToServer(ClientProjectApplication.socket, "findClientByNameAndPass," + name + "," + password);
+        String returned = Transmission.receiveFromServer(ClientProjectApplication.socket);
+        return returned;
+    }
+
+    public static RequestDAO findRequestToChange(String trainerId){
+        Transmission.sendToServer(ClientProjectApplication.socket, "findRequestToChange," + trainerId);
+        try{
+            return (RequestDAO) ClientProjectApplication.objectInputStream.readObject();
+        }catch (Exception e){
+            e.printStackTrace();
+            return  null;
+        }
+    }
+
+    public static RequestDAO findRequestToAccept(String trainerId){
+        Transmission.sendToServer(ClientProjectApplication.socket, "findRequestToAccept," + trainerId);
+        try{
+            return (RequestDAO) ClientProjectApplication.objectInputStream.readObject();
+        }catch (Exception e){
+            e.printStackTrace();
+            return  null;
+        }
+    }
+
+    public static RequestDietDAO findDietRequest(String trainerId){
+        Transmission.sendToServer(ClientProjectApplication.socket, "findDietRequest," + trainerId);
+        try{
+            return (RequestDietDAO) ClientProjectApplication.objectInputStream.readObject();
+        }catch (Exception e){
+            e.printStackTrace();
+            return  null;
+        }
+    }
+
+    public static void setFromTrainerStat(String requestId, String status){
+        Transmission.sendToServer(ClientProjectApplication.socket, "setFromTrainerStat," + requestId + "," + status);
+    }
+
+    public static void setToTrainerStat(String requestId, String status){
+        Transmission.sendToServer(ClientProjectApplication.socket, "setToTrainerStat," + requestId + "," + status);
+    }
+
+    public static void sendDietRequest(String clientId, String request){
+        Transmission.sendToServer(ClientProjectApplication.socket, "sendDietRequest," + clientId + "," + request);
+    }
+
+    public static void changeDiet(String clientId, String dietName){
+        Transmission.sendToServer(ClientProjectApplication.socket, "changeDiet," + clientId + "," + dietName);
+    }
+
+    public static DietDAO getClientsDiet(String clientId){
+        Transmission.sendToServer(ClientProjectApplication.socket, "getClientsDiet," + clientId);
+        try{
+            return (DietDAO) ClientProjectApplication.objectInputStream.readObject();
+        }catch (Exception e){
+            e.printStackTrace();
+            return  null;
+        }
+    }
 }

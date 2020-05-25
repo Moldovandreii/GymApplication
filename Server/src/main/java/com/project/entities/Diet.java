@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.List;
@@ -30,4 +32,9 @@ public class Diet {
             joinColumns = @JoinColumn(name = "dietId"),
             inverseJoinColumns = @JoinColumn(name = "foodId"))
     private List<Food> foods;
+
+    @OneToMany(mappedBy = "diet", fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL)
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<Client> clients;
 }

@@ -25,4 +25,15 @@ public interface TrainerService {
     Trainer findByUsernameAndPassword(String username, String password);
 
     List<TrainerDAO> getAllTrainerDAO();
+
+    TrainerDAO getTrainerDAO(int id);
+
+    void updateReview(int id, float review);
+
+    void updateReviews(int id, int reviews);
+
+//    void deleteClient(int trainerId, Client client);
+//
+//    void addClient(int trainerId, Client client);
+
 }

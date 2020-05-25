@@ -3,16 +3,16 @@ package com.project.dao;
 import lombok.*;
 
 import java.io.Serializable;
-import java.util.List;
 
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DietDAO implements Serializable {
-    private int dietId;
-    private String dietName;
+
+public class RequestDietDAO implements Serializable {
+    private int requestDietId;
+    private int clientId;
     private int trainerId;
-    private List<String> foods;
+    private String request;
 }

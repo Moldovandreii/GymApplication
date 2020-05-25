@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="572.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.controller.TrainerController">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="572.0" prefWidth="1444.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.controller.TrainerController">
     <children>
         <Label layoutX="51.0" layoutY="40.0" text="Program name:" />
         <Label layoutX="82.0" layoutY="82.0" text="Activities:" />
@@ -56,13 +56,22 @@
 
         <ScrollPane fx:id="notifications" layoutX="1077.0" layoutY="225.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.leftAnchor="1077.0" AnchorPane.topAnchor="325.0">
          <content>
-                <VBox fx:id="vbox" prefHeight="100.0" prefWidth="200">
+                <VBox fx:id="vbox" prefHeight="98.0" prefWidth="200.0">
                     <children>
-                        <TextArea fx:id="notifyTextT" prefHeight="100.0" prefWidth="200.0" />
+                        <TextArea fx:id="notifyTextT" prefHeight="96.0" prefWidth="200.0" />
                     </children>
                 </VBox>
          </content>
         </ScrollPane>
+
+        <Label layoutX="1055.0" layoutY="53.0" text="Requested changes: " />
+        <Label fx:id="requestText" layoutX="1177.0" layoutY="53.0" text="No current requests" />
+        <Button fx:id="readReuest" layoutX="1125.0" layoutY="23.0" mnemonicParsing="false" onAction="#readRequest" text="Read Request" />
+        <Button fx:id="acceptReuest" layoutX="1233.0" layoutY="23.0" mnemonicParsing="false" onAction="#acceptRequest" text="Accept Request" />
+        <Button fx:id="denieReuest" layoutX="1348.0" layoutY="23.0" mnemonicParsing="false" onAction="#denyRequest" text="Deny Request" />
+        <Label layoutX="1030.0" layoutY="105.0" text="Diet name and client: " />
+        <TextField fx:id="dietTxt" layoutX="1146.0" layoutY="101.0" prefHeight="26.0" prefWidth="167.0" promptText="Enter diet name and clientId" />
+        <Button fx:id="sendDiet" layoutX="1334.0" layoutY="101.0" mnemonicParsing="false" onAction="#sendDiet" text="Send Diet" />
 
     </children>
 </AnchorPane>

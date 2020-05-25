@@ -14,4 +14,6 @@ public class TrainerDAO implements Serializable {
     private String username;
     private String password;
     private String mail;
+    private float review;
+    private int reviews;
 }

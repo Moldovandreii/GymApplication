@@ -22,5 +22,6 @@ public class Attendance {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "clientId", referencedColumnName = "clientId")
+//    @OneToOne(mappedBy = "attendanceDate", cascade = CascadeType.ALL)
     private Client client;
 }

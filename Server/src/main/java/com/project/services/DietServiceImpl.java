@@ -47,4 +47,22 @@ public class DietServiceImpl implements DietService{
         }
         return dietDAOS;
     }
+
+    public Diet findByDietName(String name){
+        return dietRepository.findByDietName(name);
+    }
+
+    public DietDAO getDietDAO(Diet diet){
+        DietDAO dietDAO = new DietDAO();
+        dietDAO.setDietId(diet.getDietId());
+        dietDAO.setTrainerId(diet.getTrainer().getTrainerId());
+        dietDAO.setDietName(diet.getDietName());
+        List<String> foodsStr = new ArrayList<String>();
+        List<Food> foods = diet.getFoods();
+        for(int i=0; i<foods.size(); i++){
+            foodsStr.add(foods.get(i).getName());
+        }
+        dietDAO.setFoods(foodsStr);
+        return dietDAO;
+    }
 }
